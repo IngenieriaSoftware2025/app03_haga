@@ -1,6 +1,6 @@
 {
     "name": "mindef/demo",
-    "description": "Proyecto MVC demo",
+    "description": "app03_haga",
     "type": "project",
     "config": {
         "platform-check": false
