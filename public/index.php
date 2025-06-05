@@ -16,6 +16,7 @@ $router->get('/clientes', [ClienteController::class, 'renderizarPagina']);
 $router->post('/guardarAPI', [ClienteController::class, 'guardarAPI']);
 $router->get('/buscarAPI', [ClienteController::class, 'buscarAPI']);
 $router->post('/modificarAPI', [ClienteController::class, 'modificarAPI']);
+$router->get('/eliminarAPI', [ClienteController::class, 'eliminarAPI']);
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();

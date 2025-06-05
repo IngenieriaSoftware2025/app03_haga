@@ -273,25 +273,25 @@ const modificarAPI = async (e) => {
     const { codigo, mensaje } = datos;
 
     if (codigo === 1) {
-        await Swal.fire({
+      await Swal.fire({
         position: "center",
         icon: "success",
         title: "Exito",
         text: mensaje,
         showConfirmButton: false,
-        timer: 800
+        timer: 800,
       });
 
       limpiarTodo();
       buscarAPI();
     } else {
-        await Swal.fire({
+      await Swal.fire({
         position: "center",
         icon: "info",
         title: "Error",
         text: mensaje,
         showConfirmButton: false,
-        timer: 800
+        timer: 800,
       });
     }
   } catch (error) {
@@ -300,11 +300,63 @@ const modificarAPI = async (e) => {
   BtnModificar.disabled = false;
 };
 
+const eliminarAPI = async (e) => {
+  const id = e.currentTarget.dataset.id;
+
+  const AlertaConfirmarEliminar = await Swal.fire({
+    position: "center",
+    icon: "info",
+    title: "¿Desea eliminar un cliente",
+    text: "¿Estas completamente seguro de que lo quieres eliminar???",
+    showConfirmButton: true,
+    confirmButtonText: "Si, Eliminar",
+    confirmButtonColor: "red",
+    cancelButtonText: "No, Cancelar",
+    showCancelButton: true,
+  });
+
+  if (AlertaConfirmarEliminar.isConfirmed) {
+    const url = `/app03_haga/eliminarAPI?id=${id}`;
+    const config = {
+      method: "GET",
+    };
+    try {
+      const respuesta = await fetch(url, config);
+      const datos = await respuesta.json();
+      const { codigo, mensaje } = datos;
+
+      if (codigo === 1) {
+        await Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Exito",
+          text: mensaje,
+          showConfirmButton: false,
+          timer: 800,
+        });
+
+        buscarAPI();
+      } else {
+        await Swal.fire({
+          position: "center",
+          icon: "info",
+          title: "Error",
+          text: mensaje,
+          showConfirmButton: false,
+          timer: 800,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
+
 buscarAPI();
-//TablaClientes.on('click', '.eliminar', eliminarClientes);
+TablaClientes.on("click", ".eliminar", eliminarAPI);
 TablaClientes.on("click", ".modificar", llenarFormulario);
 ValidarTelefono.addEventListener("change", ValidacionTelefono);
 ValidarNIT.addEventListener("change", ValidacionNIT);
 FormClientes.addEventListener("submit", guardarAPI);
 BtnLimpiar.addEventListener("click", limpiarTodo);
-BtnModificar.addEventListener('click', modificarAPI);
+BtnModificar.addEventListener("click", modificarAPI);

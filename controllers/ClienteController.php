@@ -187,4 +187,29 @@ class ClienteController extends ActiveRecord
             ]);
         }
     }
+
+    public static function eliminarAPI($id){
+        getHeadersApi();
+        try {
+        $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
+        $update = "UPDATE clientes SET situacion = 0 WHERE id = $id";
+        self::SQL($update);
+        
+            http_response_code(200);
+            echo json_encode([
+                'codigo' => 1,
+                'mensaje' => 'Cliente eliminado correctamente'
+            ]);
+        } catch (Exception $e) {
+            http_response_code(400);
+            echo json_encode([
+                'codigo' => 0,
+                'mensaje' => 'Error al eliminar el cliente',
+                'detalle' => $e->getMessage()
+            ]);
+        }
+
+    }
 }
+
+?>
