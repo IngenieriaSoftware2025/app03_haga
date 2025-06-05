@@ -192,7 +192,7 @@ class ClienteController extends ActiveRecord
         getHeadersApi();
         try {
         $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
-        $update = "UPDATE clientes SET situacion = 0 WHERE id = $id";
+        $update = "UPDATE clientes SET situacion = 0 WHERE id = " . self::$db->quote($id);
         self::SQL($update);
         
             http_response_code(200);

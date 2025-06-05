@@ -248,7 +248,7 @@ const modificarAPI = async (e) => {
   e.preventDefault();
   BtnModificar.disabled = true;
 
-  if (!validarFormulario(FormClientes, [""])) {
+  if (!validarFormulario(FormClientes, ["id"])) {
     Swal.fire({
       position: "center",
       icon: "warning",
