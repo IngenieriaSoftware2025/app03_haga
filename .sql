@@ -9,3 +9,7 @@ nit varchar(15),
 correo varchar(100),
 situacion smallint default 1
 );
+
+
+
+ 
